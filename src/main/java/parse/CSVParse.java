@@ -8,13 +8,13 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class CSVParse {
-    int INDEX0;
-    int INDEX1;
-    int INDEX2;
-    int INDEX3;
-    int INDEX4;
+    static int INDEX0;
+    static int INDEX1;
+    static int INDEX2;
+    static int INDEX3;
+    static int INDEX4;
 
-    public void csvLoad(String fileUrl) {
+    public static void csvLoad(String fileUrl) {
         Path pathToFile = Paths.get(fileUrl);
         try (BufferedReader br = Files.newBufferedReader(pathToFile, StandardCharsets.UTF_8)) {
             //Find and assign column names
