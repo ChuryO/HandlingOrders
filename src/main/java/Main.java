@@ -68,7 +68,7 @@ public class Main {
                     for (Orders o : countTotalCoastList)
                         countTotalCoast += Double.parseDouble(String.valueOf(o.getPrice()));
                     System.out.println();
-                    System.out.println("Łączna kwota zamówień - " + round(countTotalCoast));
+                    System.out.println("Łączna kwota zamówień - " + Math.round(countTotalCoast));
                     System.out.println("Czy chcesz zapisac w pliku csv \"Y\" albo \"N\"");
                     incomingString = reader.readLine().toLowerCase();
                     checkYoN(incomingString, s + countTotalCoast);
@@ -196,12 +196,7 @@ public class Main {
     //Average price
     private static double average(double price, int count) {
         double tmp = price / count;
-        return round(tmp);
-    }
-
-    //Price Rounding
-    private static double round(double d) {
-        return Math.round(d * 100) / 100D;
+        return Math.round(tmp);
     }
 
     //

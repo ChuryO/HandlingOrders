@@ -36,8 +36,4 @@ public class OrderService {
         ordersDao.closeCurrentSession();
         return orders;
     }
-
-    public void writeCSV(){
-
-    }
 }
