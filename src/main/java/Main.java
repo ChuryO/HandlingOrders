@@ -10,8 +10,6 @@ public class Main {
     public static void main(String[] args) throws IOException {
         checkARGS(args);
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        String incomingString = null;
-
         while (true) {
             System.out.println();
             System.out.println("Ilość zamówień łącznie - Napisz 1");
@@ -24,9 +22,9 @@ public class Main {
             System.out.println("Średnia wartość zamówienia do klienta o wskazanym identyfikatorze - Napisz 8");
             System.out.println("Wyjście napisz 0 lub Exit");
             System.out.println();
-            incomingString = reader.readLine().toLowerCase();
-            String s = null;
+            String incomingString = reader.readLine().toLowerCase();
             //
+            String s;
             switch (incomingString) {
                 case "1":
                     s = "Ilość zamówień łącznie - ";
@@ -181,6 +179,7 @@ public class Main {
             }
         }
     }
+
     //
     private static void checkARGS(String[] args) {
         if (args.length == 0) {
@@ -230,6 +229,7 @@ public class Main {
             System.out.println();
         } else System.out.println("Wybór jest nieprawidłowy");
     }
+
     //
     private static void checkYONList(String check, List<Orders> data, String s) {
         if (check.equals("y")) {

@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table
-public class Orders{
+public class Orders {
     public Orders() {
     }
 
