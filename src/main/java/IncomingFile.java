@@ -10,9 +10,9 @@ class IncomingFile {
     IncomingFile(String string) {
         String url = getFileExtension(string);
         if (url != null && url.equals(".csv")) {
-            CSVParse.csvLoad(string);
+            new CSVParse().csvLoad(string);
         } else if (url != null && url.equals(".xml")) {
-            XMLParse.parseXml(string);
+            new XMLParse().parseXml(string);
         } else {
             System.out.println("Wrong file format");
             System.out.println("Please enter the correct file address");

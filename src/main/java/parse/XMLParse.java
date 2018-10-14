@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class XMLParse {
 
-    private static String loadXml(String filePath) {
+    private String loadXml(String filePath) {
         StringBuilder xml = null;
         try {
             xml = new StringBuilder();
@@ -26,7 +26,7 @@ public class XMLParse {
         return xml.toString();
     }
 
-    public static void parseXml(String xml) {
+    public void parseXml(String xml) {
         Document doc = Jsoup.parse(loadXml(xml));
         String clientId = new String();
         String requestId = new String();
@@ -51,7 +51,8 @@ public class XMLParse {
                     System.out.println("____________________");
                 }
             }
-            Helper.addOrderXML(clientId, requestId, name, quantity, price);
+            Helper helper = new Helper();
+            helper.addOrderXML(clientId, requestId, name, quantity, price);
         }
 
     }

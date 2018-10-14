@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
  */
 public class Helper {
 
-    public static void addOrderXML(String clientId, String requestId, String name, String quantity, String price) {
+    public void addOrderXML(String clientId, String requestId, String name, String quantity, String price) {
         Pattern pattern = Pattern.compile("^[a-z0-9]{0,6}$");
         Matcher matcher = pattern.matcher(clientId);
 
@@ -38,7 +38,7 @@ public class Helper {
     }
 
 
-    public static void addOrderCSV(String[] metadata) {
+    public void addOrderCSV(String[] metadata) {
         Pattern pattern = Pattern.compile("^[a-z0-9]{0,6}$");
         Matcher matcher = pattern.matcher(metadata[0]);
         //verification of incoming data
