@@ -32,11 +32,11 @@ public class Helper {
                 OrderService orderService = new OrderService();
                 Orders orders = new Orders(clientId, parseRequest, name, parseQuantity, parsePrice);
                 orderService.persist(orders);
+                System.out.println();
                 System.out.println("Order from XML file is added");
             } else
                 System.out.println("Order from XML file are not added: invalid data format" + clientId + " " + requestId + " " + name + " " + quantity + " " + price);
         } catch (NumberFormatException e) {
-            System.out.println("____________________");
             System.out.println("Order from XML file are not added: invalid data format");
         }finally {
             System.out.println();
@@ -62,12 +62,12 @@ public class Helper {
                 OrderService orderService = new OrderService();
                 Orders orders = new Orders(clientId, requestId, name, quantity, price);
                 orderService.persist(orders);
+                System.out.println();
                 System.out.println("Order from CSV file is added");
             } else
                 System.out.println("Order from CSV file are not added: invalid data format");
 
         } catch (Exception e) {
-            System.out.println("____________________");
             System.out.println("Order from CSV file are not added: invalid data format");
         } finally {
             System.out.println();

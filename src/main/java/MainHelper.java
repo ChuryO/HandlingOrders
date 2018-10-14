@@ -46,7 +46,7 @@ public class MainHelper {
     public void checkYoN(String check, String data) {
         if (check.equals("y")) {
             System.out.println("Wprowadź adres do nowego pliku");
-            String url = null;
+            String url;
             try {
                 url = new BufferedReader(new InputStreamReader(System.in)).readLine();
                 if (!url.contains(".csv")) {
@@ -70,7 +70,7 @@ public class MainHelper {
     public void checkYONList(String check, List<Orders> data, String s) {
         if (check.equals("y")) {
             System.out.println("Wprowadź adres do nowego pliku");
-            String url = null;
+            String url;
             StringBuilder sb = new StringBuilder();
             try {
                 url = new BufferedReader(new InputStreamReader(System.in)).readLine();

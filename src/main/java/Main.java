@@ -40,6 +40,7 @@ public class Main {
                         countAllQuantity += Integer.parseInt(String.valueOf(o.getQuantity()));
                     System.out.println();
                     System.out.println(s + countAllQuantity);
+                    System.out.println();
                     System.out.println("Czy chcesz zapisac w pliku csv \"Y\" albo \"N\"");
                     incomingString = reader.readLine().toLowerCase();
                     mainHelper.checkYoN(incomingString, s + countAllQuantity);
@@ -56,6 +57,7 @@ public class Main {
                                 countQuantityByClientId += Integer.parseInt(String.valueOf(o.getQuantity()));
                             System.out.println();
                             System.out.println(s + countQuantityByClientId);
+                            System.out.println();
                             System.out.println("Czy chcesz zapisac w pliku csv \"Y\" albo \"N\"");
                             incomingString = reader.readLine().toLowerCase();
                             mainHelper.checkYoN(incomingString, s + countQuantityByClientId);
@@ -73,6 +75,7 @@ public class Main {
                         countTotalCoast += Double.parseDouble(String.valueOf(o.getPrice()));
                     System.out.println();
                     System.out.println("Łączna kwota zamówień - " + Math.round(countTotalCoast));
+                    System.out.println();
                     System.out.println("Czy chcesz zapisac w pliku csv \"Y\" albo \"N\"");
                     incomingString = reader.readLine().toLowerCase();
                     mainHelper.checkYoN(incomingString, s + countTotalCoast);
@@ -89,6 +92,7 @@ public class Main {
                                 countCoastByClientId += Double.parseDouble(String.valueOf(o.getPrice()));
                             System.out.println();
                             System.out.println(s + countCoastByClientId);
+                            System.out.println();
                             System.out.println("Czy chcesz zapisac w pliku csv \"Y\" albo \"N\"");
                             incomingString = reader.readLine().toLowerCase();
                             mainHelper.checkYoN(incomingString, s + countCoastByClientId);
@@ -104,6 +108,7 @@ public class Main {
                     System.out.println();
                     for (Orders o : allOrderList)
                         System.out.println(s + o.getName());
+                    System.out.println();
                     System.out.println("Czy chcesz zapisac w pliku csv \"Y\" albo \"N\"");
                     incomingString = reader.readLine().toLowerCase();
                     mainHelper.checkYONList(incomingString, allOrderList, s);
@@ -120,6 +125,7 @@ public class Main {
                             for (Orders o : allOrdersByClientId) {
                                 System.out.println(s + o.getName());
                             }
+                            System.out.println();
                             System.out.println("Czy chcesz zapisac w pliku csv \"Y\" albo \"N\"");
                             incomingString = reader.readLine().toLowerCase();
                             mainHelper.checkYONList(incomingString, allOrdersByClientId, s);
@@ -141,6 +147,7 @@ public class Main {
 
                     System.out.println();
                     System.out.println(s + mainHelper.average(countTotalAverageCoast, countTotal));
+                    System.out.println();
                     System.out.println("Czy chcesz zapisac w pliku csv \"Y\" albo \"N\"");
                     incomingString = reader.readLine().toLowerCase();
                     mainHelper.checkYoN(incomingString, String.valueOf(mainHelper.average(countTotalAverageCoast, countTotal)));
@@ -160,6 +167,7 @@ public class Main {
                             }
                             System.out.println();
                             System.out.println(s + mainHelper.average(countAverageCoastByClientId, countId));
+                            System.out.println();
                             System.out.println("Czy chcesz zapisac w pliku csv \"Y\" albo \"N\"");
                             incomingString = reader.readLine().toLowerCase();
                             mainHelper.checkYoN(incomingString, String.valueOf(mainHelper.average(countAverageCoastByClientId, countId)));

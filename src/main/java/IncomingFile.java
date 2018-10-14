@@ -17,16 +17,16 @@ class IncomingFile {
         } else {
             switch (url) {
                 case ".csv":
-                    System.out.println("");
                     new CSVParse().csvLoad(string);
+                    System.out.println();
                     System.out.println("Data from CSV");
-                    System.out.println("");
+                    System.out.println();
                     break;
                 case ".xml":
-                    System.out.println("");
                     new XMLParse().parseXml(string);
+                    System.out.println();
                     System.out.println("Data from XML");
-                    System.out.println("");
+                    System.out.println();
                     break;
                 default:
                     break;
