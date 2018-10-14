@@ -6,16 +6,20 @@ import services.OrderService;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- *
- */
 public class Helper {
-
+    /**
+     * This class creates an object of the class orders and transfers to the designer data from CSV and XML files
+     * @param clientId
+     * @param requestId
+     * @param name
+     * @param quantity
+     * @param price
+     */
     public void addOrderXML(String clientId, String requestId, String name, String quantity, String price) {
         Pattern pattern = Pattern.compile("^[a-z0-9]{0,6}$");
         Matcher matcher = pattern.matcher(clientId);
 
-        //verification of incoming data
+        /**verification of incoming data*/
         try {
             long parseRequest = Long.parseLong(String.valueOf(requestId));
             int parseQuantity = Integer.parseInt(String.valueOf(quantity));
@@ -41,7 +45,7 @@ public class Helper {
     public void addOrderCSV(String[] metadata) {
         Pattern pattern = Pattern.compile("^[a-z0-9]{0,6}$");
         Matcher matcher = pattern.matcher(metadata[0]);
-        //verification of incoming data
+        /**verification of incoming data*/
         try {
             String clientId = metadata[0];
             long requestId = Long.parseLong(metadata[1]);

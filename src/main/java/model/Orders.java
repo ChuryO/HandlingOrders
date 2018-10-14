@@ -2,6 +2,9 @@ package model;
 
 import javax.persistence.*;
 
+/**
+ * this class with Model orders
+ */
 @Entity
 @Table
 public class Orders {

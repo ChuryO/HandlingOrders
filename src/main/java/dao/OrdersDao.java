@@ -13,6 +13,7 @@ public class OrdersDao implements OrdersDaoInterface<Orders, String> {
     private Session currentSession;
     private Transaction currentTransaction;
 
+
     public OrdersDao() {
     }
 
@@ -27,6 +28,7 @@ public class OrdersDao implements OrdersDaoInterface<Orders, String> {
         return currentSession;
     }
 
+
     public void closeCurrentSession() {
         currentSession.close();
     }
@@ -36,8 +38,10 @@ public class OrdersDao implements OrdersDaoInterface<Orders, String> {
         currentSession.close();
     }
 
+    /**
+     * @return SessionFactory Configuration
+     */
     private static SessionFactory getSessionFactory() {
-
         Configuration configuration = new Configuration().configure();
         configuration.addAnnotatedClass(Orders.class);
         StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
@@ -64,11 +68,19 @@ public class OrdersDao implements OrdersDaoInterface<Orders, String> {
         getCurrentSession().save(entity);
     }
 
+    /**
+     * @return list with all orders
+     */
     @SuppressWarnings("unchecked")
     public List<Orders> findAllOrders() {
         return (List<Orders>) getCurrentSession().createQuery("from Orders").list();
     }
 
+    /**
+     * this method return list with all orders by id
+     * @param inId
+     * @return List
+     */
     @SuppressWarnings("unchecked")
     public List<Orders> findAllOrdersByClientId(String inId) {
         return (List<Orders>) getCurrentSession().createQuery("from Orders where clientId = :inId")

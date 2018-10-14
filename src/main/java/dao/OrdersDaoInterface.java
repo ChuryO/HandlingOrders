@@ -3,6 +3,11 @@ package dao;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * DAO interface
+ * @param <T>
+ * @param <Id>
+ */
 public interface OrdersDaoInterface<T, Id extends Serializable> {
     public void persist(T entity);
 

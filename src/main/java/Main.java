@@ -4,11 +4,16 @@ import services.OrderService;
 import java.io.*;
 import java.util.List;
 
+/**
+ * @author Churychev Oleksandr
+ *
+ */
 public class Main {
     static OrderService orderService = new OrderService();
 
     public static void main(String[] args) throws IOException {
-        checkARGS();
+        arguments();
+
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         while (true) {
             System.out.println();
@@ -24,6 +29,7 @@ public class Main {
             System.out.println();
             String incomingString = reader.readLine().toLowerCase();
             //
+            MainHelper mainHelper = new MainHelper();
             String s;
             switch (incomingString) {
                 case "1":
@@ -36,7 +42,7 @@ public class Main {
                     System.out.println(s + countAllQuantity);
                     System.out.println("Czy chcesz zapisac w pliku csv \"Y\" albo \"N\"");
                     incomingString = reader.readLine().toLowerCase();
-                    checkYoN(incomingString, s + countAllQuantity);
+                    mainHelper.checkYoN(incomingString, s + countAllQuantity);
                     break;
                 case "2":
                     System.out.println("Wprowadź identyfikator klienta:");
@@ -52,7 +58,7 @@ public class Main {
                             System.out.println(s + countQuantityByClientId);
                             System.out.println("Czy chcesz zapisac w pliku csv \"Y\" albo \"N\"");
                             incomingString = reader.readLine().toLowerCase();
-                            checkYoN(incomingString, s + countQuantityByClientId);
+                            mainHelper.checkYoN(incomingString, s + countQuantityByClientId);
                         } else {
                             System.out.println();
                             System.out.println("Nie znaleziono klienta o takim ID spróbuj ponownie");
@@ -69,7 +75,7 @@ public class Main {
                     System.out.println("Łączna kwota zamówień - " + Math.round(countTotalCoast));
                     System.out.println("Czy chcesz zapisac w pliku csv \"Y\" albo \"N\"");
                     incomingString = reader.readLine().toLowerCase();
-                    checkYoN(incomingString, s + countTotalCoast);
+                    mainHelper.checkYoN(incomingString, s + countTotalCoast);
                     break;
                 case "4":
                     System.out.println("Wprowadź identyfikator klienta:");
@@ -85,11 +91,10 @@ public class Main {
                             System.out.println(s + countCoastByClientId);
                             System.out.println("Czy chcesz zapisac w pliku csv \"Y\" albo \"N\"");
                             incomingString = reader.readLine().toLowerCase();
-                            checkYoN(incomingString, s + countCoastByClientId);
+                            mainHelper.checkYoN(incomingString, s + countCoastByClientId);
                         } else {
                             System.out.println();
                             System.out.println("Nie znaleziono klienta o takim ID spróbuj ponownie");
-
                         }
                     }
                     break;
@@ -101,7 +106,7 @@ public class Main {
                         System.out.println(s + o.getName());
                     System.out.println("Czy chcesz zapisac w pliku csv \"Y\" albo \"N\"");
                     incomingString = reader.readLine().toLowerCase();
-                    checkYONList(incomingString, allOrderList, s);
+                    mainHelper.checkYONList(incomingString, allOrderList, s);
 
                     break;
                 case "6":
@@ -117,13 +122,12 @@ public class Main {
                             }
                             System.out.println("Czy chcesz zapisac w pliku csv \"Y\" albo \"N\"");
                             incomingString = reader.readLine().toLowerCase();
-                            checkYONList(incomingString, allOrdersByClientId, s);
+                            mainHelper.checkYONList(incomingString, allOrdersByClientId, s);
                         } else {
                             System.out.println();
                             System.out.println("Nie znaleziono klienta o takim ID spróbuj ponownie");
                         }
                     }
-
                     break;
                 case "7":
                     s = "Średnia wartość zamówienia - ";
@@ -136,10 +140,10 @@ public class Main {
                     }
 
                     System.out.println();
-                    System.out.println(s + average(countTotalAverageCoast, countTotal));
+                    System.out.println(s + mainHelper.average(countTotalAverageCoast, countTotal));
                     System.out.println("Czy chcesz zapisac w pliku csv \"Y\" albo \"N\"");
                     incomingString = reader.readLine().toLowerCase();
-                    checkYoN(incomingString, String.valueOf(average(countTotalAverageCoast, countTotal)));
+                    mainHelper.checkYoN(incomingString, String.valueOf(mainHelper.average(countTotalAverageCoast, countTotal)));
                     break;
                 case "8":
                     System.out.println("Wprowadź identyfikator klienta:");
@@ -155,14 +159,13 @@ public class Main {
                                 countId++;
                             }
                             System.out.println();
-                            System.out.println(s + average(countAverageCoastByClientId, countId));
+                            System.out.println(s + mainHelper.average(countAverageCoastByClientId, countId));
                             System.out.println("Czy chcesz zapisac w pliku csv \"Y\" albo \"N\"");
                             incomingString = reader.readLine().toLowerCase();
-                            checkYoN(incomingString, String.valueOf(average(countAverageCoastByClientId, countId)));
+                            mainHelper.checkYoN(incomingString, String.valueOf(mainHelper.average(countAverageCoastByClientId, countId)));
                         } else {
                             System.out.println();
                             System.out.println("Nie znaleziono klienta o takim ID spróbuj ponownie");
-
                         }
                     }
                     break;
@@ -180,11 +183,11 @@ public class Main {
         }
     }
 
-    //
-    private static void checkARGS() {
-        String[] substr = null;
+    /**This method checks if you want to write data to a new CSV File*/
+    private static void arguments() {
         System.out.println("Proszę podać argumenty:");
         String arg = null;
+        String[] substr = null;
         try {
             arg = new BufferedReader(new InputStreamReader(System.in)).readLine();
             substr = arg.split(" ");
@@ -193,6 +196,7 @@ public class Main {
         }
         assert arg != null;
         if (arg.length() == 0) {
+            System.out.println("Brak danych");
             System.exit(0);
         } else {
             if (substr.length != 0) {
@@ -201,70 +205,6 @@ public class Main {
                 }
             }
         }
-    }
-
-    //Average price
-    private static double average(double price, int count) {
-        double tmp = price / count;
-        return Math.round(tmp);
-    }
-
-    //
-    private static void writeCSV(String filename, String data) {
-        try {
-            FileWriter fileWriter = new FileWriter(new File(filename));
-            fileWriter.write(data.toString());
-            System.out.println("Done " + filename);
-            fileWriter.close();
-        } catch (IOException e) {
-            System.out.println("Wprowadzony url może nie być dozwolony, spróbuj ponownie.");
-            e.printStackTrace();
-        }
-    }
-
-    //
-    private static void checkYoN(String check, String data) {
-        if (check.equals("y")) {
-            System.out.println("Wprowadź adres do nowego pliku");
-            String url = null;
-            try {
-                url = new BufferedReader(new InputStreamReader(System.in)).readLine();
-                if (!url.contains(".csv")) {
-                    writeCSV(url + ".csv", String.valueOf(data));
-                } else
-                    writeCSV(url, String.valueOf(data));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } else if (check.equals("n")) {
-            System.out.println();
-        } else System.out.println("Wybór jest nieprawidłowy");
-    }
-
-    //
-    private static void checkYONList(String check, List<Orders> data, String s) {
-        if (check.equals("y")) {
-            System.out.println("Wprowadź adres do nowego pliku");
-            String url = null;
-            StringBuilder sb = new StringBuilder();
-            try {
-                url = new BufferedReader(new InputStreamReader(System.in)).readLine();
-                for (Orders o : data) {
-                    sb.append(s);
-                    sb.append(o.getName());
-                    sb.append('\n');
-                }
-                if (!url.contains(".csv")) {
-                    writeCSV(url + ".csv", sb.toString());
-
-                } else
-                    writeCSV(url, String.valueOf(data));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } else if (check.equals("n")) {
-            System.out.println();
-        } else System.out.println("Wybór jest nieprawidłowy");
     }
 }
 

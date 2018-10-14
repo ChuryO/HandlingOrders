@@ -7,6 +7,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+/**
+ * This class prepares data from the input CSV file and transfers it to the database
+ */
 public class CSVParse {
     int INDEX0;
     int INDEX1;
@@ -14,6 +17,10 @@ public class CSVParse {
     int INDEX3;
     int INDEX4;
 
+    /**
+     * this method checks data from CSV File and add them in db
+     * @param fileUrl
+     */
     public void csvLoad(String fileUrl) {
         Path pathToFile = Paths.get(fileUrl);
         try (BufferedReader br = Files.newBufferedReader(pathToFile, StandardCharsets.UTF_8)) {
@@ -21,6 +28,9 @@ public class CSVParse {
             String[] columnLine = br.readLine().split(",");
             for (int i = 0; i < columnLine.length; i++) {
                 String tmp = columnLine[i].toLowerCase();
+                /**
+                 * here I check if the columns in the file are correctly located
+                 */
                 if (tmp.contains("client_id") || tmp.contains("clientid")) {
                     INDEX0 = i;
                 } else if (tmp.contains("request_id") || tmp.contains("requestid")) {
@@ -37,7 +47,10 @@ public class CSVParse {
                     System.out.println("____________________");
                 }
             }
-            //Sets the correct index
+            /**
+             * here I change their index
+             */
+
             String data = br.readLine();
             String[] attributesIn;
             String[] attributesOut = new String[columnLine.length];

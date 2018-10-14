@@ -8,13 +8,16 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+/**
+ * This class prepares data from the input XML file and transfers it to the database
+ */
 public class XMLParse {
 
     private String loadXml(String filePath) {
         StringBuilder xml = null;
         try {
             xml = new StringBuilder();
-            Scanner scanner = new Scanner(new File(filePath)); // i.e. C:\\testXML.xml
+            Scanner scanner = new Scanner(new File(filePath));
 
             while (scanner.hasNextLine()) {
                 xml.append(scanner.nextLine());
@@ -26,8 +29,13 @@ public class XMLParse {
         return xml.toString();
     }
 
+    /**
+     * This method checks tags and transfers data in the correct format to the database.
+     * @param xml
+     */
     public void parseXml(String xml) {
         Document doc = Jsoup.parse(loadXml(xml));
+        Helper helper = new Helper();
         String clientId = null;
         String requestId = null;
         String name = null;
@@ -49,9 +57,9 @@ public class XMLParse {
                     System.out.println("____________________");
                     System.out.println("invalid row or incorrect column names");
                     System.out.println("____________________");
+                    break;
                 }
             }
-            Helper helper = new Helper();
             helper.addOrderXML(clientId, requestId, name, quantity, price);
         }
 

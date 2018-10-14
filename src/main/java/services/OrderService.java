@@ -6,6 +6,9 @@ import model.Orders;
 import java.util.List;
 
 public class OrderService {
+    /**
+     * This service class
+     */
     private static OrdersDao ordersDao;
 
     public OrderService() {
