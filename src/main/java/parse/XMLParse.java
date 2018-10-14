@@ -35,7 +35,6 @@ public class XMLParse {
      */
     public void parseXml(String xml) {
         Document doc = Jsoup.parse(loadXml(xml));
-        Helper helper = new Helper();
         String clientId = null;
         String requestId = null;
         String name = null;
@@ -57,9 +56,9 @@ public class XMLParse {
                     System.out.println("____________________");
                     System.out.println("invalid row or incorrect column names");
                     System.out.println("____________________");
-                    break;
                 }
             }
+            Helper helper = new Helper();
             helper.addOrderXML(clientId, requestId, name, quantity, price);
         }
 

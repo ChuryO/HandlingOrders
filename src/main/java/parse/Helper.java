@@ -38,6 +38,8 @@ public class Helper {
         } catch (NumberFormatException e) {
             System.out.println("____________________");
             System.out.println("Order from XML file are not added: invalid data format");
+        }finally {
+            System.out.println();
         }
     }
 
@@ -62,11 +64,13 @@ public class Helper {
                 orderService.persist(orders);
                 System.out.println("Order from CSV file is added");
             } else
-                System.out.println("Order from CSV file are not added: invalid data format " + metadata[0] + metadata[1] + metadata[2] + metadata[3] + metadata[4]);
+                System.out.println("Order from CSV file are not added: invalid data format");
 
-        } catch (NumberFormatException e) {
+        } catch (Exception e) {
             System.out.println("____________________");
             System.out.println("Order from CSV file are not added: invalid data format");
+        } finally {
+            System.out.println();
         }
     }
 }

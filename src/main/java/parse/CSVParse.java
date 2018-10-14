@@ -11,14 +11,15 @@ import java.nio.file.Paths;
  * This class prepares data from the input CSV file and transfers it to the database
  */
 public class CSVParse {
-    int INDEX0;
-    int INDEX1;
-    int INDEX2;
-    int INDEX3;
-    int INDEX4;
+    private int INDEX0;
+    private int INDEX1;
+    private int INDEX2;
+    private int INDEX3;
+    private int INDEX4;
 
     /**
      * this method checks data from CSV File and add them in db
+     *
      * @param fileUrl
      */
     public void csvLoad(String fileUrl) {
@@ -55,20 +56,29 @@ public class CSVParse {
             String[] attributesIn;
             String[] attributesOut = new String[columnLine.length];
             Helper helper = new Helper();
+
             while (data != null) {
                 attributesIn = data.split(",");
-                attributesOut[0] = attributesIn[INDEX0];
-                attributesOut[1] = attributesIn[INDEX1];
-                attributesOut[2] = attributesIn[INDEX2];
-                attributesOut[3] = attributesIn[INDEX3];
-                attributesOut[4] = attributesIn[INDEX4];
-                helper.addOrderCSV(attributesOut);
+                if (attributesIn.length == columnLine.length) {
+                    attributesOut[0] = attributesIn[INDEX0];
+                    attributesOut[1] = attributesIn[INDEX1];
+                    attributesOut[2] = attributesIn[INDEX2];
+                    attributesOut[3] = attributesIn[INDEX3];
+                    attributesOut[4] = attributesIn[INDEX4];
+                    helper.addOrderCSV(attributesOut);
+                } else {
+                    System.out.println("Order from CSV file are not added: invalid data format" +  data);
+                }
                 data = br.readLine();
             }
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+            System.out.println();
         }
+
     }
+
 }
 
 

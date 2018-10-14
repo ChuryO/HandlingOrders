@@ -9,7 +9,7 @@ import org.hibernate.cfg.Configuration;
 
 import java.util.List;
 
-public class OrdersDao implements OrdersDaoInterface<Orders, String> {
+public class OrdersDao implements OrdersDaoInterface<Orders> {
     private Session currentSession;
     private Transaction currentTransaction;
 
@@ -17,15 +17,13 @@ public class OrdersDao implements OrdersDaoInterface<Orders, String> {
     public OrdersDao() {
     }
 
-    public Session openCurrentSession() {
+    public void openCurrentSession() {
         currentSession = getSessionFactory().openSession();
-        return currentSession;
     }
 
-    public Session openCurrentSessionWithTransaction() {
+    public void openCurrentSessionWithTransaction() {
         currentSession = getSessionFactory().openSession();
         currentTransaction = currentSession.beginTransaction();
-        return currentSession;
     }
 
 
@@ -48,20 +46,8 @@ public class OrdersDao implements OrdersDaoInterface<Orders, String> {
         return configuration.buildSessionFactory(builder.build());
     }
 
-    public Session getCurrentSession() {
+    private Session getCurrentSession() {
         return currentSession;
-    }
-
-    public void setCurrentSession(Session currentSession) {
-        this.currentSession = currentSession;
-    }
-
-    public Transaction getCurrentTransaction() {
-        return currentTransaction;
-    }
-
-    public void setCurrentTransaction(Transaction currentTransaction) {
-        this.currentTransaction = currentTransaction;
     }
 
     public void persist(Orders entity) {
@@ -78,7 +64,7 @@ public class OrdersDao implements OrdersDaoInterface<Orders, String> {
 
     /**
      * this method return list with all orders by id
-     * @param inId
+     *
      * @return List
      */
     @SuppressWarnings("unchecked")

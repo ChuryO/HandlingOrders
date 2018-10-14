@@ -1,17 +1,16 @@
 package dao;
 
-import java.io.Serializable;
 import java.util.List;
 
 /**
  * DAO interface
+ *
  * @param <T>
- * @param <Id>
  */
-public interface OrdersDaoInterface<T, Id extends Serializable> {
-    public void persist(T entity);
+public interface OrdersDaoInterface<T> {
+    void persist(T entity);
 
-    public List<T> findAllOrders();
+    List<T> findAllOrders();
 
-    public List<T> findAllOrdersByClientId(String clientId);
+    List<T> findAllOrdersByClientId(String clientId);
 }
