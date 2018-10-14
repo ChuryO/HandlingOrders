@@ -28,11 +28,11 @@ public class XMLParse {
 
     public void parseXml(String xml) {
         Document doc = Jsoup.parse(loadXml(xml));
-        String clientId = new String();
-        String requestId = new String();
-        String name = new String();
-        String quantity = new String();
-        String price = new String();
+        String clientId = null;
+        String requestId = null;
+        String name = null;
+        String quantity = null;
+        String price = null;
         for (Element request : doc.select("request")) {
             for (int x = 0; x < request.children().size(); x++) {
                 if (request.children().get(x).tagName().toLowerCase().equals("client_id") || request.children().get(x).tagName().equals("clientid")) {

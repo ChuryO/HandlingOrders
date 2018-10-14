@@ -8,7 +8,7 @@ public class Main {
     static OrderService orderService = new OrderService();
 
     public static void main(String[] args) throws IOException {
-        checkARGS(args);
+        checkARGS();
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         while (true) {
             System.out.println();
@@ -181,13 +181,24 @@ public class Main {
     }
 
     //
-    private static void checkARGS(String[] args) {
-        if (args.length == 0) {
-            System.out.println("Nie zarejestrowano żadnych plików");
+    private static void checkARGS() {
+        String[] substr = null;
+        System.out.println("Proszę podać argumenty:");
+        String arg = null;
+        try {
+            arg = new BufferedReader(new InputStreamReader(System.in)).readLine();
+            substr = arg.split(" ");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        assert arg != null;
+        if (arg.length() == 0) {
             System.exit(0);
         } else {
-            for (String arg : args) {
-                new IncomingFile(arg);
+            if (substr.length != 0) {
+                for (String args : substr) {
+                    new IncomingFile(args);
+                }
             }
         }
     }

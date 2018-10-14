@@ -1,26 +1,35 @@
 import parse.CSVParse;
 import parse.XMLParse;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.util.Objects;
 
 class IncomingFile {
 
     IncomingFile(String string) {
+
         String url = getFileExtension(string);
-        if (url != null && url.equals(".csv")) {
-            new CSVParse().csvLoad(string);
-        } else if (url != null && url.equals(".xml")) {
-            new XMLParse().parseXml(string);
+        if (Objects.equals(url,null)) {
+            System.out.println("Nieprawidłowy plik");
         } else {
-            System.out.println("Wrong file format");
-            System.out.println("Please enter the correct file address");
-            try {
-                url = new BufferedReader(new InputStreamReader(System.in)).readLine();
-                new IncomingFile(url);
-            } catch (IOException e) {
-                e.printStackTrace();
+            switch (url) {
+                case ".csv":
+                    System.out.println("");
+                    new CSVParse().csvLoad(string);
+                    System.out.println("Data from CSV");
+                    System.out.println("");
+                    break;
+                case ".xml":
+                    System.out.println("");
+                    new XMLParse().parseXml(string);
+                    System.out.println("Data from XML");
+                    System.out.println("");
+                    break;
+                case "":
+                    System.out.println("Nieprawidłowy plik");
+                    break;
+                default:
+                    System.out.println("Nieprawidłowy plik");
+                    break;
             }
         }
     }
